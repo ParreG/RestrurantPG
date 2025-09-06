@@ -20,7 +20,6 @@ namespace RestrurantPG.Controllers
         }
 
         [HttpGet("GetAllDishes")]
-        [Authorize]
         public async Task<IActionResult> GetAllDishes()
         {
             var result = await dishService.GetAllDishesAsync();
@@ -48,7 +47,6 @@ namespace RestrurantPG.Controllers
         }
 
         [HttpPost("AddDish")]
-        [Authorize]
         public async Task<IActionResult> AddDish(NewDishDTO dishDTO)
         {
             var result = await dishService.AddDishAsync(dishDTO);
