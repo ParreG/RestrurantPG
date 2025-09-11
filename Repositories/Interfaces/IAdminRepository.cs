@@ -10,7 +10,10 @@ namespace RestrurantPG.Repositories.Interfaces
         Task AddAsync(Admin admin);
         Task SaveChangesAsync();
         Task<Guid> CreateAdminInvite();
-        public Task<AdminInvite> CheckInviteCodeAsync(string code);
+        Task<AdminInvite?> CheckInviteCodeAsync(string code);
         Task UseInviteAsync(AdminInvite invite);
+        Task<List<AdminInvite>> GetAllInvitesAsync();
+        Task<List<Admin>> GetAllAdminsAsync();
+        Task<Admin?> UpdateAdminAsync(Admin admin);
     }
 }

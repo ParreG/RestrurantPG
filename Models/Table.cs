@@ -13,5 +13,9 @@ namespace RestrurantPG.Models
         [Required]
         [Range(1, 8)] 
         public int Capacity { get; set; }
+
+        // X och Y axel för placering i resturangen!
+        public int? X { get; set; }
+        public int? Y { get; set; }
     }
 }

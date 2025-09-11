@@ -107,5 +107,14 @@ namespace RestrurantPG.Services.Implementations
 
             return (true, tables, "Lediga bord hämtade.");
         }
+
+        public async Task<(bool Success, List<Table>? Tables, string Message)> UpdateTablePositionsAsync(List<TablePositionDTO> updates)
+        {
+            if (updates == null || !updates.Any())
+                return (false, null, "Inga uppdateringar skickades");
+
+            var updatedTables = await tableRepository.UpdateTablePositionsAsync(updates);
+            return (true, updatedTables, "Bordens positioner uppdaterades");
+        }
     }
 }

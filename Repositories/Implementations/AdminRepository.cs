@@ -69,6 +69,7 @@ namespace RestrurantPG.Repositories.Implementations
             return await context.AdminInvites.FirstOrDefaultAsync(aI => aI.InviteCode == guidCode);
         }
 
+
         public async Task UseInviteAsync(AdminInvite invite)
         {
             invite.IsUsed = true;
@@ -76,6 +77,35 @@ namespace RestrurantPG.Repositories.Implementations
             await context.SaveChangesAsync();
         }
 
+        public async Task<List<AdminInvite>> GetAllInvitesAsync()
+        {
+            var adminInvites = await context.AdminInvites.ToListAsync();
+            return adminInvites;
+        }
+
+        public async Task<List<Admin>> GetAllAdminsAsync()
+        {
+            var admins = await context.Admins.ToListAsync();
+            return admins;
+        }
+
+        public async Task<Admin?> UpdateAdminAsync(Admin admin)
+        {
+            var oldAdmin = await context.Admins.FirstOrDefaultAsync(a => a.Admin_Id == admin.Admin_Id);
+            
+            if (oldAdmin == null)
+            {
+                return null;
+            }
+
+            context.Entry(oldAdmin).CurrentValues.SetValues(admin);
+
+            await context.SaveChangesAsync();
+            return oldAdmin;
+        }
+
+
+        // Ska fortsätta med att ändra invites! 
 
 
     }

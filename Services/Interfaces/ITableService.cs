@@ -12,5 +12,7 @@ namespace RestrurantPG.Services.Interfaces
         public Task<(bool Success, Table? Table, string? Message)> UpdateTableAsync(int tableNumber, UpdateTableDTO updateTableDTO);
         public Task<(bool Success, Table? Table, string? Message)> DeleteTableAsync(int tablenumber);
         public Task<(bool Success, List<Table>? Tables, string Message)> GetAvailableTablesAsync(DateTime bookingStart, int numberOfGuests);
+        public Task<(bool Success, List<Table>? Tables, string Message)> UpdateTablePositionsAsync(List<TablePositionDTO> updates);
+
     }
 }

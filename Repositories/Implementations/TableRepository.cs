@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestrurantPG.Data;
+using RestrurantPG.DTOs.TableDTOs;
 using RestrurantPG.Models;
 using RestrurantPG.Repositories.Interfaces;
+using System.Linq;
 
 namespace RestrurantPG.Repositories.Implementations
 {
@@ -77,6 +79,28 @@ namespace RestrurantPG.Repositories.Implementations
 
             return freeTables;
         }
+
+        public async Task<List<Table>> UpdateTablePositionsAsync(List<TablePositionDTO> updates)
+        {
+            var numbers = updates.Select(u => u.TableNumber).ToList();
+            var tables = await context.Tables
+                .Where(t => numbers.Contains(t.Number))
+                .ToListAsync();
+
+            foreach (var update in updates)
+            {
+                var table = tables.FirstOrDefault(t => t.Number == update.TableNumber);
+                if (table != null)
+                {
+                    table.X = update.X;
+                    table.Y = update.Y;
+                }
+            }
+
+            await context.SaveChangesAsync();
+            return tables;
+        }
+
 
     }
 }

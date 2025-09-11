@@ -37,6 +37,7 @@ namespace RestrurantPG
                 app.UseSwaggerUI();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();

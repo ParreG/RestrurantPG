@@ -45,7 +45,6 @@ namespace RestrurantPG.Services.Implementations
                 return (false, null, "email adress used already.");
             }
 
-
             var inviteCode = adminRegisterDTO.RegistrationCode;
 
             var invite = await adminRepository.CheckInviteCodeAsync(inviteCode);

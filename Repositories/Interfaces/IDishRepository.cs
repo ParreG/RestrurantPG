@@ -5,10 +5,10 @@ namespace RestrurantPG.Repositories.Interfaces
 {
     public interface IDishRepository
     {
-        public Task<List<Dish>> GetAllDishesAsync();
-        public Task<Dish?> GetDishByIdAsync(int id);
-        public Task<Dish?> AddDishAsync(NewDishDTO dishDTO);
-        public Task<Dish?> UpdateDishAsync(Dish dish);
-        public Task<bool> DeleteDishAsync(Dish dish);
+        Task<List<Dish>> GetAllDishesAsync();
+        Task<Dish?> GetDishByIdAsync(int id);
+        Task<Dish?> AddDishAsync(NewDishDTO dishDTO);
+        Task<Dish?> UpdateDishAsync(Dish dish);
+        Task<bool> DeleteDishAsync(Dish dish);
     }
 }

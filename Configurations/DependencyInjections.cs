@@ -26,14 +26,8 @@ namespace RestrurantPG.Configurations
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingService, BookingService>();
 
-
-
-
-
-
-
-
-
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAdminService, AdminService>();
 
             return services;
         }

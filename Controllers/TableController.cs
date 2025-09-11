@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestrurantPG.DTOs.TableDTOs;
 using RestrurantPG.Services.Interfaces;
 
@@ -113,5 +114,23 @@ namespace RestrurantPG.Controllers
 
             return Ok(result.Tables);
         }
+
+        [HttpPut("UpdatePositions")]
+        public async Task<IActionResult> UpdatePositions([FromBody] BatchTablePositionUpdateDTO batch)
+        {
+            var result = await tableService.UpdateTablePositionsAsync(batch.Updates);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(new
+            {
+                message = result.Message,
+                updated = result.Tables
+            });
+        }
+
+
+
     }
 }
