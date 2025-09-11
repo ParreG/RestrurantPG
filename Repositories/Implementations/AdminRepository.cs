@@ -105,7 +105,20 @@ namespace RestrurantPG.Repositories.Implementations
         }
 
 
-        // Ska fortsätta med att ändra invites! 
+        public async Task<AdminInvite?> UpdateAdminInviteAsync(AdminInvite invite)
+        {
+            var oldInvite = await context.AdminInvites.FirstOrDefaultAsync(a => a.AdminInvite_Id == invite.AdminInvite_Id);
+
+            if (oldInvite != null)
+            {
+                return null;
+            }
+
+            context.Entry(oldInvite).CurrentValues.SetValues(invite);
+
+            await context.SaveChangesAsync();
+            return oldInvite;
+        }
 
 
     }

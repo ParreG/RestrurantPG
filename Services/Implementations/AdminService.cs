@@ -69,6 +69,10 @@ namespace RestrurantPG.Services.Implementations
             return (true, updatedAdmin, "Admin är uppdaterad!");
         }
 
-        // Ska fortsätta med att ändra invites! 
+        //public async Task<(bool Success, AdminInvite? adminInvite, string Massange)> UpdateAdminInviteAsync(int id, AdminInviteDTO inviteDTO)
+        //{
+        //    var oldAdmin = await adminRepository.GetByIdAsync(id);
+
+        //}
     }
 }

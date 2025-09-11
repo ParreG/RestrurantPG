@@ -1,4 +1,5 @@
-﻿using RestrurantPG.Models;
+﻿using RestrurantPG.DTOs.AdminDTOs;
+using RestrurantPG.Models;
 
 namespace RestrurantPG.Services.Interfaces
 {
@@ -7,7 +8,7 @@ namespace RestrurantPG.Services.Interfaces
         Task<(bool Success, List<AdminInvite> invites, string Massange)> GetAllInvitesAsync();
         Task<(bool Success, List<Admin> admins, string Massange)> GetAllAdminsAsync();
         Task<(bool Success, Admin? admin, string Massange)> UpdateAdminAsync(Admin admin);
+        //Task<AdminInvite?> UpdateAdminInviteAsync(int id, AdminInviteDTO inviteDTO);
     }
 
-    // Ska fortsätta med att ändra invites! 
 }

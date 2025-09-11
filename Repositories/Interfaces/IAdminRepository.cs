@@ -15,5 +15,6 @@ namespace RestrurantPG.Repositories.Interfaces
         Task<List<AdminInvite>> GetAllInvitesAsync();
         Task<List<Admin>> GetAllAdminsAsync();
         Task<Admin?> UpdateAdminAsync(Admin admin);
+        Task<AdminInvite?> UpdateAdminInviteAsync(AdminInvite invite);
     }
 }
