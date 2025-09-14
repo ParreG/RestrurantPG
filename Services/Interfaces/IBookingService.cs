@@ -9,6 +9,6 @@ namespace RestrurantPG.Services.Interfaces
         public Task<(bool Success, Booking? Booking, string Message)> GetBookingByIdAsync(int id);
         public Task<(bool Success, Booking? Booking, string Message)> AddBookingAsync(NewBookingDTO bookingDTO);
         public Task<(bool Success, Booking? Booking, string Message)> UpdateBookingAsync(int bookingId, UpdateBookingDTO bookingDTO);
-        public Task<(bool Success, Booking? Booking, string Message)> DeleteBookingAsync(int bookingId, string email);
+        public Task<(bool Success, Booking? Booking, string Message)> DeleteBookingAsync(int bookingId);
     }
 }

@@ -20,7 +20,7 @@ namespace RestrurantPG.Services.Implementations
 
             if (dishes.Count == 0)
             {
-                return (false, null, "Inga maträtter hittades!");
+                return (true, new List<Dish>(), "Inga maträtter hittades!");
             }
 
             return (true, dishes, "Listar alla maträtter.");

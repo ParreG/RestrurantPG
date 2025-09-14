@@ -66,11 +66,13 @@ namespace RestrurantPG.Repositories.Implementations
                 .Where(t => t.Capacity >= numberOfGuests)
                 .ToListAsync();
 
+            // Rätt sätt: [start1, end1) överlappar [start2, end2) om start1 < end2 && end1 > start2
             var conflictingBookings = await context.Bookings
                 .Where(b =>
                     bookingStart < b.BookingStart.AddHours(2) &&
-                    bookingEnd > b.BookingStart.AddHours(-2))
+                    bookingEnd > b.BookingStart)
                 .ToListAsync();
+
 
             var occupiedTableIds = conflictingBookings.Select(b => b.TableId_Fk).ToHashSet();
             var freeTables = candidateTables

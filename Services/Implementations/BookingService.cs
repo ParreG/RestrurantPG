@@ -116,26 +116,41 @@ namespace RestrurantPG.Services.Implementations
             var booking = await bookingRepository.GetBookingByIdAsync(bookingId);
 
             if (booking == null || booking.Guest.Email.Trim().ToLower() != bookingDTO.Email.Trim().ToLower())
-            {
                 return (false, null, "Bokningen hittades inte, eller så stämmer inte mejladressen med bokningen!");
-            }
 
-            booking.NumberOfGuests = bookingDTO.NumberOfGuests;
-            booking.BookingStart = bookingDTO.BookingStart;
+            var newStart = bookingDTO.BookingStart;
+            var newEnd = newStart.AddHours(2);
+            var newGuests = bookingDTO.NumberOfGuests;
+
+            // Hämta alla tillgängliga bord
+            var available = await tableService.GetAvailableTablesAsync(newStart, newGuests);
+            if (!available.Success || available.Tables == null || available.Tables.Count == 0)
+                return (false, null, "Inget ledigt bord med tillräcklig kapacitet.");
+
+            // Välj bästa bord: minst "spill" av platser
+            var chosenTable = available.Tables
+                .OrderBy(t => t.Capacity - newGuests)
+                .ThenBy(t => t.Capacity)
+                .First();
+
+            booking.NumberOfGuests = newGuests;
+            booking.BookingStart = newStart;
+            booking.BookingEnd = newEnd;
+            booking.TableId_Fk = chosenTable.Table_Id;
 
             await bookingRepository.UpdateBookingAsync(booking);
-
-            return (true, booking, "Bookningen har nu uppdaterats");
-
+            return (true, booking, "Bokningen har uppdaterats.");
         }
 
-        public async Task<(bool Success, Booking? Booking, string Message)> DeleteBookingAsync(int bookingId, string email)
+
+
+        public async Task<(bool Success, Booking? Booking, string Message)> DeleteBookingAsync(int bookingId)
         {
             var booking = await bookingRepository.GetBookingByIdAsync(bookingId);
 
-            if (booking == null || booking.Guest.Email.Trim().ToLower() != email.Trim().ToLower())
+            if (booking == null)
             {
-                return (false, null, "Bokningen hittades inte, eller så stämmer inte mejladressen med bokningen!");
+                return (false, null, "Bokningen hittades inte");
             }
 
             await bookingRepository.DeleteBookingAsync(booking);

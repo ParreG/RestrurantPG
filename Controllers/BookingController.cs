@@ -84,9 +84,9 @@ namespace RestrurantPG.Controllers
 
 
         [HttpDelete("DeleteBooking/{id}")]
-        public async Task<IActionResult> DeleteBooking(int id, [FromQuery] string email)
+        public async Task<IActionResult> DeleteBooking(int id)
         {
-            var result = await bookingService.DeleteBookingAsync(id, email);
+            var result = await bookingService.DeleteBookingAsync(id);
 
             if (!result.Success)
             {

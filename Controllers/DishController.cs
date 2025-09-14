@@ -29,8 +29,9 @@ namespace RestrurantPG.Controllers
                 return NotFound(result.Massage);
             }
 
-            return Ok(result.Item2); 
+            return Ok(result.Item2);
         }
+
 
         [HttpGet("GetDishById/{id}")]
         [Authorize]
@@ -47,6 +48,7 @@ namespace RestrurantPG.Controllers
         }
 
         [HttpPost("AddDish")]
+        [Authorize]
         public async Task<IActionResult> AddDish(NewDishDTO dishDTO)
         {
             var result = await dishService.AddDishAsync(dishDTO);
